@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave&family=Yanone+Kaffeesatz:wght@500&display=swap');
+/* font-family: 'Sedgwick Ave', cursive;
+font-family: 'Yanone Kaffeesatz', sans-serif; */
+
+body{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+	background-image: linear-gradient(-45deg,#cf5c5c,#c19b4a,#678607,#3c518b,#068f56,#64b3d9,#208ea2,#498ada,#5b73df,#897ed3,#cf5c5c,#63470c);
+	background-size: 1100% 1100%;
+	height: 100vh; 
+	animation: animateBg 10s linear infinite;
+  }
+@keyframes animateBg {
+	0% { background-position: 0% 0%; }
+	100% { background-position: 0% 100%; }
+}
+th{
+	color:rgb(211, 192, 192);
+}
+#liveloc{
+	text-shadow: black 2px 2px 4px !important;
+}
+#forecast,#more{
+	text-shadow: black 1px 1px 2px !important;
+}
+
+.heading{
+    font-family: 'Sedgwick Ave', cursive;
+	background: transparent;
+}
+#location{
+    font-size: 2em;
+	background: transparent;
+}
+#temp{
+    font-size:5em;
+    position: relative;
+	background: transparent;
+}
+#celcius{
+    font-size: 2rem;
+    position: absolute;
+	background: transparent;
+}
+#btn{
+	background-color: #456c9b !important;
+	border:none !important;
+	box-shadow: black 1px 1px 3px ;
+}

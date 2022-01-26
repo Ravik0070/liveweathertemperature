@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave&family=Yanone+Kaffeesatz:wght@500&display=swap');
+/* font-family: 'Sedgwick Ave', cursive;
+font-family: 'Yanone Kaffeesatz', sans-serif; */
+
+body{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+.heading{
+    font-family: 'Sedgwick Ave', cursive;
+}
+#location{
+    font-size: 2em;
+}
+#temp{
+    font-size:5em;
+    position: relative;
+}
+#celcius{
+    font-size: 2rem;
+    position: absolute;
+}

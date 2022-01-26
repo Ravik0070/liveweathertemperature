@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Weather Forecast{% endblock title %}
+{% block content %}
+        <div id="liveloc" class="container-fluid mt-4 bg-transparent d-flex flex-column">
+            <div class="text-center heading fs-1 text-white bg-transparent">Weather forecast <i class="fas fa-cloud-sun"></i></div>
+            <div class="bg-transparent">
+                <div class=" d-flex bg-transparent justify-content-center text-white">
+                    <div id="location" class="bg-transparent px-2">{{city}},{{country}}
+                        <br><i class="fas fa-map-marker-alt bg-transparent"> {{date}}</i>
+                    </div>
+                    <div id="temp" class="bg-transparent px-5">{{temp}}<span id="celcius" class="pt-4">&#8451;</span></div>
+                </div>
+            </div>
+        </div>
+        <div id="forecast" class="container-fluid bg-transparent">
+            <table class="table table-stripped text-white fs-2 bg-transparent">
+                <tr>
+                    <th scope="col ">Date</th>
+                    {% for d in fdate %}
+                    <td class="fs-2">{{d}}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <th scope="col">Temp.</th>
+                    {% for d in ftemp %}
+                    <td class="fs-2">{{d}}&#8451;</td>
+                    {% endfor %}
+                </tr>
+                
+                <tr>
+                    <th scope="col">Desc.</th>
+                    {% for d in fdesc %}
+                    <td class="fs-2">{{d|capfirst}}</td>
+                    {% endfor %}
+                </tr>
+                
+                <tr>
+                    <th scope="col">Wind</th>
+                    {% for d in fwind %}
+                    <td class="fs-2">{{d}}(m/s)</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+
+        <div id="more" class="container-fluid mt-2 text-center text-white fs-2 bg-transparent">
+            <p class="h2">More details today</p>
+            <table class="table table-stripped text-white bg-transparent w-100">
+                <tr>
+                    <th scope="col">Description : <br> {{desc|capfirst}}</th>
+                    <th scope="col">Humidity : <br> {{humidity}}%</th>
+                </tr>
+            </table>
+        </div>
+        <div class="container">
+            <form action="{% url 'weatherapi:searchcity' %}" method="POST" class="form">
+                {% csrf_token %}
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <input type="text" class="form-control" name="searchcity" placeholder="Search city">
+                    <button type="submit" id="btn" class="btn btn-primary w-50 fs-2 my-2 ">Search</button>
+                </div>
+            </form>
+        </div>
+{% endblock content %}
