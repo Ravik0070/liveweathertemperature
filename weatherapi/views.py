@@ -6,7 +6,7 @@ import datetime
 def home(request):
      # -------------location------
         api = settings.API_KEY
-        res = requests.get(settings.IP_FIND)
+        res = requests.get('https://ipinfo.io/')
         data = res.json()
         city = data['city']
         country = data['country']

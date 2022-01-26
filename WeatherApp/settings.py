@@ -24,8 +24,6 @@ SECRET_KEY = config('SECRET_KEY')
 
 API_KEY = config('api')
 
-IP_FIND = config('ip')
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('Debug')
 
