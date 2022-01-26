@@ -9,7 +9,7 @@ font-family: 'Yanone Kaffeesatz', sans-serif; */
 body{
     font-family: 'Yanone Kaffeesatz', sans-serif;
 	background-image: linear-gradient(-45deg,#cf5c5c,#c19b4a,#678607,#3c518b,#068f56,#64b3d9,#208ea2,#498ada,#5b73df,#897ed3,#cf5c5c,#63470c);
-	background-size: 100% 100%;
+	background-size: 1100% 1100%;
 	height: 100vh; 
 	animation: animateBg 10s linear infinite;
   }
