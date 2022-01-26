@@ -6,7 +6,7 @@
             <div class="text-center heading fs-1 text-white bg-transparent">Weather forecast <i class="fas fa-cloud-sun"></i></div>
             <div class="bg-transparent">
                 <div class=" d-flex bg-transparent justify-content-center text-white">
-                    <div id="location" class="bg-transparent fs-5 px-2">{% if city %}{{city}},{{city1}},{{country}}{% else %}Turn on the location{% endif %}
+                    <div id="location" class="bg-transparent fs-5 px-2">{% if city %}{{city}},{{city1}}{% else %}Turn on the location{% endif %}
                         <br><i class="fas fa-map-marker-alt fs-5 bg-transparent"> {{date}}</i>
                     </div>
                     <div id="temp" class="bg-transparent fs-1 px-5">{{temp}}<span id="celcius">&#8451;</span></div>
@@ -53,21 +53,37 @@
                 </tr>
             </table>
         </div>
-        <div class="container">
-            <form action="{% url 'weatherapi:searchcity' %}" method="POST" class="form">
-                {% csrf_token %}
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                    <input type="text" class="form-control" name="searchcity" placeholder="Search city">
-                    <button type="submit" id="btn" class="btn btn-primary w-50 fs-2 my-2 ">Search</button>
-                </div>
-            </form>
+        <div class="container d-flex justify-content-center text-white">
+            <a href="{% url 'weatherapi:home' %}"><div class="btn btn-info">Go to Search </div></a>
         </div>
-
         <div id="location">
-            <form id="formid" class="d-none" action="{% url 'weatherapi:home' %}" method="GET">
+            <form id="formid" class="d-none" action="{% url 'weatherapi:livehome' %}" method="GET">
                 <input type="text" steps="any" name="latitude" id="latitude">
                 <input type="text" steps="any" name="longitude" id="longitude">
                 <button type="submit" id="submits" onclick="submitform()">submit</button>
             </form>
         </div>
+        <script>
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                } else {
+                    div.innerHTML = "The Browser Does not Support Geolocation";
+                }
+            }
+            function showPosition(position) {
+                document.getElementById("latitude").value = position.coords.latitude;
+                document.getElementById("longitude").value = position.coords.longitude;
+            }
+            function showError(error) {
+                if(error.PERMISSION_DENIED){
+                    div.innerHTML = "The User have denied the request for Geolocation.";
+                }
+            } 
+            getLocation();
+            function submitform(){
+                document.getElementById("submits").click();
+            }
+            setTimeout(submitform,4000);
+            </script>
 {% endblock content  %}

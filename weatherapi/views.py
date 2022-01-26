@@ -14,22 +14,17 @@ def home(request):
         lon = float(long1)
         city = data['city']
         country = data['country']
-
         # -------------location end------
-
         url = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api}'
         response = requests.get(url).json()
         temp = response['main']['temp']
         temp = kelvinToCelcius(temp)
         desc = response['weather'][0]['description']
         humidity = response['main']['humidity']
-
-        # livecontext = {'temp':temp,'desc':desc,'city':city,'country':country,'region':region}
         forecastDate = [] 
         forecastTemp = [] 
         forecastWind = []
         forecastDesc = []
-
         url = f'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=hourly&appid={api}'
         response = requests.get(url).json()
         t = response['daily'] 
@@ -40,63 +35,53 @@ def home(request):
                 forecastTemp.append(kelvinToCelcius(temp = t[i]['temp']['day']))
                 forecastWind.append(t[i]['wind_speed']) #m/s
                 forecastDesc.append(t[i]['weather'][0]['description'])
-        # forecast = {'fdate':forecastDate,'ftemp':forecastTemp,'fwind':forecastWind,'fdesc':forecastDesc}
-        
         for i in range(len(forecastDate)):
                 forecastDate[i] = forecastDate[i].strftime('%d %b, %Y')
-
         return render(request,'base.html',{'fdate':forecastDate,'ftemp':forecastTemp,'fwind':forecastWind,'fdesc':forecastDesc
         ,'temp':temp,'desc':desc,'humidity':humidity,'date':d,'city':city,'country':country})
 
-
 def livehome(request):
-        geolocator = Nominatim(user_agent="geoapiExercises")
         api = settings.API_KEY
+        geolocator = Nominatim(user_agent="geoapiExercises")
         if request.method == "GET":
                 l1 = request.GET.get('latitude','28.6504')  
-                l2 = request.GET.get('longitude','77.2372') 
-                print(l1)
-                lat = float(l1)
-                lon = float(l2)
-                city = str(geolocator.reverse(f'{lat},{lon}'))
-                city_list = city.split(',')
-                city = city_list[0]
-                city1 = city_list[3]
-                url = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api}'
-                response = requests.get(url).json()
-                temp = response['main']['temp']
-                temp = kelvinToCelcius(temp)
-                desc = response['weather'][0]['description']
-                humidity = response['main']['humidity']
-
-        # livecontext = {'temp':temp,'desc':desc,'city':city,'country':country,'region':region}
-                forecastDate = [] 
-                forecastTemp = [] 
-                forecastWind = []
-                forecastDesc = []
-
-                url = f'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=hourly&appid={api}'
-                response = requests.get(url).json()
-                t = response['daily'] 
-                d = datetime.datetime.fromtimestamp(t[0]['dt'])
-                d = d.strftime('%d %b,%Y')
-                for i in range(5):
-                        forecastDate.append(datetime.datetime.fromtimestamp(t[i]['dt']))
-                        forecastTemp.append(kelvinToCelcius(temp = t[i]['temp']['day']))
-                        forecastWind.append(t[i]['wind_speed']) #m/s
-                        forecastDesc.append(t[i]['weather'][0]['description'])
-        # forecast = {'fdate':forecastDate,'ftemp':forecastTemp,'fwind':forecastWind,'fdesc':forecastDesc}
-        
-                for i in range(len(forecastDate)):
-                        forecastDate[i] = forecastDate[i].strftime('%d %b, %Y')
-
-                return render(request,'livelocation.html',{'fdate':forecastDate,'ftemp':forecastTemp,'fwind':forecastWind,'fdesc':forecastDesc
-                ,'temp':temp,'desc':desc,'city':city,'city1':city1,'humidity':humidity,'date':d})
+                l2 = request.GET.get('longitude','77.2372')
+                if(not l1 and not l2):
+                        return render(request,"error.html")
+                else:
+                        print(l1)
+                        lat = float(l1)
+                        lon = float(l2)
+                        city = str(geolocator.reverse(f'{lat},{lon}'))
+                        city_list = city.split(',')
+                        city = city_list[0]
+                        city1 = city_list[3]
+                        url = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api}'
+                        response = requests.get(url).json()
+                        temp = response['main']['temp']
+                        temp = kelvinToCelcius(temp)
+                        desc = response['weather'][0]['description']
+                        humidity = response['main']['humidity']
+                        forecastDate = [] 
+                        forecastTemp = [] 
+                        forecastWind = []
+                        forecastDesc = []
+                        url = f'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=hourly&appid={api}'
+                        response = requests.get(url).json()
+                        t = response['daily'] 
+                        d = datetime.datetime.fromtimestamp(t[0]['dt'])
+                        d = d.strftime('%d %b,%Y')
+                        for i in range(5):
+                                forecastDate.append(datetime.datetime.fromtimestamp(t[i]['dt']))
+                                forecastTemp.append(kelvinToCelcius(temp = t[i]['temp']['day']))
+                                forecastWind.append(t[i]['wind_speed']) #m/s
+                                forecastDesc.append(t[i]['weather'][0]['description'])        
+                        for i in range(len(forecastDate)):
+                                forecastDate[i] = forecastDate[i].strftime('%d %b, %Y')
+                        return render(request,'livelocation.html',{'fdate':forecastDate,'ftemp':forecastTemp,'fwind':forecastWind,'fdesc':forecastDesc
+                        ,'temp':temp,'desc':desc,'city':city,'city1':city1,'humidity':humidity,'date':d})
         else:
                 return render(request,'result.html')
-
-
-
 
 def searchcity(request):
         api = settings.API_KEY
@@ -137,9 +122,6 @@ def searchcity(request):
         else:
                 return render(request,'result.html')
         
-                
-
-
 def kelvinToCelcius(temp):
         temp = temp - 273.15  #kelvin to celcius 
         temp = "{:.2f}".format(temp)
