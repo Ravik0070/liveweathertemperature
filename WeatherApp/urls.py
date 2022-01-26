@@ -24,3 +24,4 @@ urlpatterns = [
     path('', include('weatherapi.urls',namespace='weatherapi')),
 ]
 
+
