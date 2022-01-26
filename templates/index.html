@@ -15,6 +15,35 @@
     {% block content %}
     
     {% endblock content %}
-    </div>
+</div>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            div.innerHTML = "The Browser Does not Support Geolocation";
+        }
+    }
+    var long,lat;
+    function showPosition(position) {
+        long = position.coords.longitude; 
+        lat = position.coords.latitude;
+        document.getElementById("latitude").value = lat;
+        document.getElementById("longitude").value = long;
+        
+    }
+    
+    function showError(error) {
+        if(error.PERMISSION_DENIED){
+            div.innerHTML = "The User have denied the request for Geolocation.";
+        }
+    } 
+    getLocation();
+
+    function submitform(){
+        document.getElementById("submits").click();
+    }
+    setTimeout(submitform,1000);
+    </script>
 </body>
 </html>

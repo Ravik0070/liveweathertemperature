@@ -3,7 +3,7 @@
 {% block title %}Search | Weather Forecast{% endblock title %}
 {% block content %}
 <div class="container link-light mt-3 justify-content-center text-center ">
-    <a class="text-decoration-none text-light" href="{% url 'weatherapi:home'%}"><i class="fas fa-map-marker-alt bg-transparent"></i>
+    <a class="text-decoration-none text-light" href="{% url 'weatherapi:livehome'%}><i class="fas fa-map-marker-alt bg-transparent"></i>
         <br>
         <p> live Temperature </p>
     </a> 
@@ -13,7 +13,7 @@
         <div class="text-center heading fs-1 text-white bg-transparent">Weather forecast <i class="fas fa-cloud-sun"></i></div>
         <div class="bg-transparent">
             <div class=" d-flex bg-transparent justify-content-center text-white">
-                <div id="location" class="bg-transparent fs-2 px-2">{{citys}}
+                <div id="location" class="bg-transparent fs-2 px-2">{{citys|capfirst}}
                     <br><i class="fas fa-map-marker-alt fs-5 bg-transparent"> {{date}}</i>
                 </div>
                 <div id="temp" class="bg-transparent fs-1 px-5">{{tempcity}}<span id="celcius" class="pt-4">&#8451;</span></div>
