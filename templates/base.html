@@ -2,49 +2,48 @@
 {% load static %}
 {% block title %}Weather Forecast{% endblock title %}
 {% block content %}
-        <div id="liveloc" class="container-fluid mt-4 bg-transparent d-flex flex-column">
+        <div id="liveloc" class="container mt-4  bg-transparent d-flex flex-column">
             <div class="text-center heading fs-1 text-white bg-transparent">Weather forecast <i class="fas fa-cloud-sun"></i></div>
             <div class="bg-transparent">
                 <div class=" d-flex bg-transparent justify-content-center text-white">
-                    <div id="location" class="bg-transparent px-2">{{city}},{{country}}
-                        <br><i class="fas fa-map-marker-alt bg-transparent"> {{date}}</i>
+                    <div id="location" class="bg-transparent fs-2 px-2">{{city}},{{country}}
+                        <br><i class="fas fa-map-marker-alt fs-5 bg-transparent"> {{date}}</i>
                     </div>
-                    <div id="temp" class="bg-transparent px-5">{{temp}}<span id="celcius" class="pt-4">&#8451;</span></div>
+                    <div id="temp" class="bg-transparent fs-1 px-5">{{temp}}<span id="celcius">&#8451;</span></div>
                 </div>
             </div>
         </div>
-        <div id="forecast" class="container-fluid bg-transparent">
-            <table class="table table-stripped text-white fs-2 bg-transparent">
+        <div id="forecast" class="table-responsive table-body bg-transparent">
+            <table id="table" class="table  table-stripped text-white w-100 fs-5 bg-transparent">
                 <tr>
                     <th scope="col ">Date</th>
                     {% for d in fdate %}
-                    <td class="fs-2">{{d}}</td>
+                    <td class="fs-5">{{d}}</td>
                     {% endfor %}
                 </tr>
 
                 <tr>
                     <th scope="col">Temp.</th>
                     {% for d in ftemp %}
-                    <td class="fs-2">{{d}}&#8451;</td>
+                    <td class="fs-5">{{d}}&#8451;</td>
                     {% endfor %}
                 </tr>
                 
                 <tr>
                     <th scope="col">Desc.</th>
                     {% for d in fdesc %}
-                    <td class="fs-2">{{d|capfirst}}</td>
+                    <td class="fs-5">{{d|capfirst}}</td>
                     {% endfor %}
                 </tr>
                 
                 <tr>
                     <th scope="col">Wind</th>
                     {% for d in fwind %}
-                    <td class="fs-2">{{d}}(m/s)</td>
+                    <td class="fs-5">{{d}}(m/s)</td>
                     {% endfor %}
                 </tr>
             </table>
         </div>
-
         <div id="more" class="container-fluid mt-2 text-center text-white fs-2 bg-transparent">
             <p class="h2">More details today</p>
             <table class="table table-stripped text-white bg-transparent w-100">
