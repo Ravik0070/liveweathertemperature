@@ -2,6 +2,8 @@ from django.shortcuts import redirect, render
 import requests
 from django.conf import settings
 import datetime
+import geocoder
+
 
 def home(request):
      # -------------location------
@@ -12,9 +14,15 @@ def home(request):
         country = data['country']
         region = data['region']
         timezones = data['timezone']
+        g = geocoder.ip('me')
+        l1 = g.latlng[0]
+        l2 = g.latlng[1]
         lat1 , long1  = data['loc'].split(',',1)
-        lat = float(lat1)
-        lon = float(long1)
+        # lat = float(lat1)
+        lat = float(l1)
+        # lon = float(long1)
+        lon = float(l2)
+
         # -------------location end------
 
         url = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api}'
