@@ -25,7 +25,7 @@ SECRET_KEY = config('SECRET_KEY')
 API_KEY = config('api')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('Debug')
+DEBUG = config('Debug',cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
