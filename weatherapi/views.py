@@ -94,7 +94,6 @@ def searchcity(request):
                         url2 = f"http://api.openweathermap.org/data/2.5/forecast?q={citys}&appid={api}"
                         response1 = requests.get(url1).json()
                         response2 = requests.get(url2).json()
-                        # print(response2)
                         forecastDate = [] 
                         forecastTemp = [] 
                         forecastWind = []
